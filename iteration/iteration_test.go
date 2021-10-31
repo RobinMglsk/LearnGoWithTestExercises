@@ -12,8 +12,8 @@ func TestRepeat(t *testing.T){
 }
 
 func ExampleRepeat(){
-	Repeat("r", 3)
-	fmt.Println("rrr")
+	repeated := Repeat("r", 3)
+	fmt.Println(repeated)
 	// Output: rrr
 }
 
