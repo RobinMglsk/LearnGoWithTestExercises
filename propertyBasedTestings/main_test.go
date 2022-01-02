@@ -1,27 +1,48 @@
 package main
 
-import "testing"
+import (
+	"fmt"
+	"testing"
+)
 
-func TestRomanNumerals(t *testing.T){
+func TestRomanNumerals(t *testing.T) {
 
 	cases := []struct {
-		Description string
 		Arabic int
-		Want string
+		Want   string
 	}{
-		{"1 gets converted to I", 1, "I"},
-		{"2 gets converted to II", 2, "II"},
-		{"3 gets converted to III", 3, "III"},
-		{"4 gets converted to IV", 4, "IV"},
-		{"5 gets converted to V", 5, "V"},
-		{"6 gets converted to VI", 6, "VI"},
-		{"6 gets converted to VII", 7, "VII"},
-		{"6 gets converted to VIII", 8, "VIII"},
-		{"6 gets converted to IX", 9, "IX"},
+		{1, "I"},
+		{2, "II"},
+		{3, "III"},
+		{4, "IV"},
+		{5, "V"},
+		{6, "VI"},
+		{7, "VII"},
+		{8, "VIII"},
+		{9, "IX"},
+		{10, "X"},
+		{11, "XI"},
+		{20, "XX"},
+		{21, "XXI"},
+		{40, "XL"},
+		{47, "XLVII"},
+		{49, "XLIX"},
+		{50, "L"},
+		{100, "C"},
+		{90, "XC"},
+		{400, "CD"},
+		{500, "D"},
+		{900, "CM"},
+		{1000, "M"},
+		{1984, "MCMLXXXIV"},
+		{3999, "MMMCMXCIX"},
+		{2014, "MMXIV"},
+		{1006, "MVI"},
+		{798, "DCCXCVIII"},
 	}
 
 	for _, test := range cases {
-		t.Run(test.Description, func(t *testing.T){
+		t.Run(fmt.Sprintf("%d gets converted to %q", test.Arabic, test.Want), func(t *testing.T) {
 			got := ConvertToRoman(test.Arabic)
 			if got != test.Want {
 				t.Errorf("got %q, want %q", got, test.Want)
