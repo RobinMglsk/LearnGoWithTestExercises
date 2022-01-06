@@ -19,9 +19,17 @@ func TestNewBlogPosts(t *testing.T){
 
 	const(
 		firstBody  = `Title: Post 1
-Description: Description 1`
+Description: Description 1
+Tags: tag1, tag2
+---
+Hello
+World`
 		secondBody  = `Title: Post 2
-Description: Description 2`
+Description: Description 2
+Tags: tag1, tag2
+Some body
+That I used
+To know`
 	)
 
 	fs := fstest.MapFS{
@@ -39,7 +47,8 @@ Description: Description 2`
 		t.Errorf("got %d posts, wanted %d posts", len(posts), len(fs))
 	}
 
-	assertPost(t, posts[0], blogposts.Post{Title: "Post 1", Description: "Description 1"})
+	assertPost(t, posts[0], blogposts.Post{Title: "Post 1", Description: "Description 1",  Tags: []string{"tag1", "tag2"}, Body: `Hello
+World`})
 }
 
 func assertPost(t *testing.T, got blogposts.Post, want blogposts.Post) {
