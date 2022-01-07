@@ -15,7 +15,10 @@ func main(){
 		log.Fatalf("problem opeing %s %v", dbFileName, err)
 	}
 
-	store := &FileSystemPlayerStore{db}
+	store, err := NewFileSystemPlayerStore(db)
+	if err != nil {
+		log.Fatalf("problem creating file system player store, %v", err)
+	}
 	server := NewPlayerServer(store)
 	log.Printf("starting server listing on %s", addr)
 
