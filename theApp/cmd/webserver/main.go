@@ -4,6 +4,8 @@ import (
 	"log"
 	"net/http"
 	"os"
+
+	poker "github.com/robinmglsk/server"
 )
 
 const dbFileName = "game.db.json"
@@ -15,11 +17,11 @@ func main(){
 		log.Fatalf("problem opeing %s %v", dbFileName, err)
 	}
 
-	store, err := NewFileSystemPlayerStore(db)
+	store, err := poker.NewFileSystemPlayerStore(db)
 	if err != nil {
 		log.Fatalf("problem creating file system player store, %v", err)
 	}
-	server := NewPlayerServer(store)
+	server := poker.NewPlayerServer(store)
 	log.Printf("starting server listing on %s", addr)
 
 	if err := http.ListenAndServe(addr, server); err != nil {
